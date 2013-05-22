@@ -121,7 +121,11 @@ int Dictionary::recognizePlay(char const* inputString)
 
 VoiceRecognition::VoiceRecognition()
 {
-
+    //default language model and dictionary
+    //strcpy(languageModel, (KStandardDirs::locateLocal("data", "voicerecognition/mylm.lm", true)).toStdString().c_str());
+    //strcpy(myDictionary,(KStandardDirs::locateLocal("data", "voicerecognition/mydict.dic", true)).toStdString().c_str());
+    strcpy(languageModel,(QString("mylm.lm")).toStdString().c_str());
+    strcpy(myDictionary,(QString("mydict.dic")).toStdString().c_str());
 }
 
 void VoiceRecognition::startVoiceRecognition()
@@ -150,12 +154,6 @@ void VoiceRecognition::startVoiceRecognition()
     };
 
     static jmp_buf jbuf;
-
-    char languageModel[100];
-    strcpy(languageModel, (KStandardDirs::locateLocal("data", "voicerecognition/mylm.lm", true)).toStdString().c_str());
-
-    char myDictionary[100];
-    strcpy(myDictionary,(KStandardDirs::locateLocal("data", "voicerecognition/mydict.dic", true)).toStdString().c_str());
 
     cout << ".................." << languageModel << endl << myDictionary << endl <<"...............";
     char * argv[] ={ "./pcro","-lm",languageModel,"-dict",myDictionary};
@@ -437,6 +435,11 @@ void VoiceRecognition::sleep_msec(int32 ms)
     tmo.tv_usec = ms * 1000;
 
     select(0, NULL, NULL, NULL, &tmo);
+}
+
+void VoiceRecognition::SelectAcousticModel(QString myAcousticModel)
+{
+    strcpy(languageModel,(QString(myAcousticModel+".lm")).toStdString().c_str());
 }
 
 VoiceRecognition::~VoiceRecognition()

@@ -36,10 +36,13 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     liveVideoObject = new liveVideo();
     facemodeltostore = 0;
+    allwaveObject = new alsaSoundcard();
     ui->setupUi(this);
     wave = new outputWave();
 
-    QtConcurrent::run(this,&MainWindow::recognizeVoice);
+    //enable this option to start voice recognition on starting the application
+
+    //QtConcurrent::run(this,&MainWindow::recognizeVoice);
 
     connect(this,SIGNAL(allValuesSet(VoiceRecognition *)),this,SLOT(setWaveValues(VoiceRecognition *)));
     connect(this,SIGNAL(plotAndPlayNow()),this,SLOT(plotAndPlay()));
@@ -167,9 +170,12 @@ void MainWindow::plotAndPlay()
     QtConcurrent::run(this,&MainWindow::plotWave);
 }
 
-void MainWindow::recognizeVoice()
+void MainWindow::recognizeVoice(QString personNmae)
 {
     VoiceRecognition *recognizer = new VoiceRecognition();
+
+    //select acoustic model belonging to perticular person by supplying person name in QString form
+    recognizer->SelectAcousticModel(personNmae);
     recognizer->startVoiceRecognition();
 
     //tranfser handle to setWaveValues()
@@ -212,7 +218,9 @@ void MainWindow::on_RecognizeFacePB_clicked()
         delete tlddatabase;
 
         Tldrecognition* const tmpTLD      = new Tldrecognition;
-        tmpTLD->getRecognitionConfidence(comparemodels);
+        std::pair<float,QString> faceName = tmpTLD->getRecognitionConfidence(comparemodels);
+        qDebug() << "person "<< faceName.second << " recognized in front of the system";
         delete tmpTLD;
     }
+    QtConcurrent::run(this,&MainWindow::recognizeVoice,(QString)"mylm");
 }

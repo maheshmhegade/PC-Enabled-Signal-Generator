@@ -72,7 +72,7 @@ public:
     tldinterface()
     {
         tld = new tld::TLD();
-        showOutput = 1;
+        showOutput = 0;
         printResults = NULL;
         saveDir = ".";
         threshold = 0.5;
@@ -98,7 +98,7 @@ public:
         imAcqFree(imAcq);
     }
     pair<unitFaceModel *,IplImage *> generatefacemodel();
-    float getrecognitionconfidence(QList<unitFaceModel *> );
+    pair<float,QString> getrecognitionconfidence(QList<unitFaceModel *> );
 };
 
 #endif /* TLDINTERFACE_H_ */

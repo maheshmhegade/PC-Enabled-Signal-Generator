@@ -133,8 +133,9 @@ pair<unitFaceModel *,IplImage *> tldinterface::generatefacemodel()
     return make_pair(facemodel,faceToDisplay);
 }
 
-float tldinterface::getrecognitionconfidence(QList<unitFaceModel *> comparemodels)
+pair<float,QString> tldinterface::getrecognitionconfidence(QList<unitFaceModel *> comparemodels)
 {
+    showOutput = 1;
     IplImage *img = imAcqGetImg(imAcq);
     for (int i = 0 ;i < 2 ;i++)//intentionally introduced delay to get clear image
     {
@@ -153,6 +154,7 @@ float tldinterface::getrecognitionconfidence(QList<unitFaceModel *> comparemodel
 
     char facename[15] = "";
 
+    QString personName("");
     reuseFrameOnce = false;
 
     char string[128];
@@ -164,9 +166,11 @@ float tldinterface::getrecognitionconfidence(QList<unitFaceModel *> comparemodel
 
     char key = 's';
 
-    while(key != 'q')
+    float maxConfidence = 0.0;
+    int numAttempts = 0;
+    while(numAttempts <= 3)
     {
-
+        numAttempts++;
         for(int i = 0 ; i < comparemodels.size(); i++ )
         {
             strcpy(facename ,qPrintable(comparemodels.at(i)->Name));
@@ -206,15 +210,19 @@ float tldinterface::getrecognitionconfidence(QList<unitFaceModel *> comparemodel
 
         if(maxconf == 0.0)
         {
-            return 0.0;
+            float tmpconf = 0.0;
+            return make_pair(tmpconf,personName);
         }
 
         numTrainImages = 0;
 
         int recognCount = 0;
 
-        while(key != 'q')
+        int displayDuration = 0;
+
+        while(key != 'q' && displayDuration <=30)
         {
+            displayDuration++;
             numTrainImages++;
 
             if(!reuseFrameOnce)
@@ -236,6 +244,8 @@ float tldinterface::getrecognitionconfidence(QList<unitFaceModel *> comparemodel
 
             if(tld->currConf > 0.0)
             {
+                personName = QString::fromAscii(facename, 15);
+                maxConfidence = tld->currConf;
                 recognCount = 0;
             }
             else if(tld->currConf == 0.0)
@@ -305,6 +315,10 @@ float tldinterface::getrecognitionconfidence(QList<unitFaceModel *> comparemodel
                 reuseFrameOnce = false;
             }
         }
+        if(maxConfidence > 0.1)
+        {
+            break;
+        }
     }
-    return 0.34;
+    return make_pair(maxConfidence,personName);
 }

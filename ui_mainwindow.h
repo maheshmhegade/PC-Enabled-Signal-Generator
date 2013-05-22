@@ -4,7 +4,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created: Wed May 22 15:52:40 2013
+** Created: Wed May 22 16:32:48 2013
 **      by: Qt User Interface Compiler version 4.8.4
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -56,9 +56,9 @@ public:
     QPushButton *applypushButton;
     QPushButton *SaveFacePB;
     QLineEdit *FaceNameLE;
+    QGraphicsView *FaceGV;
     QPushButton *DetectFacePB;
     QPushButton *RecognizeFacePB;
-    QGraphicsView *FaceGV;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -152,27 +152,27 @@ public:
         SaveFacePB = new QPushButton(centralWidget);
         SaveFacePB->setObjectName(QString::fromUtf8("SaveFacePB"));
 
-        formLayout->setWidget(6, QFormLayout::LabelRole, SaveFacePB);
+        formLayout->setWidget(8, QFormLayout::LabelRole, SaveFacePB);
 
         FaceNameLE = new QLineEdit(centralWidget);
         FaceNameLE->setObjectName(QString::fromUtf8("FaceNameLE"));
 
-        formLayout->setWidget(6, QFormLayout::FieldRole, FaceNameLE);
-
-        DetectFacePB = new QPushButton(centralWidget);
-        DetectFacePB->setObjectName(QString::fromUtf8("DetectFacePB"));
-
-        formLayout->setWidget(7, QFormLayout::LabelRole, DetectFacePB);
-
-        RecognizeFacePB = new QPushButton(centralWidget);
-        RecognizeFacePB->setObjectName(QString::fromUtf8("RecognizeFacePB"));
-
-        formLayout->setWidget(7, QFormLayout::FieldRole, RecognizeFacePB);
+        formLayout->setWidget(8, QFormLayout::FieldRole, FaceNameLE);
 
         FaceGV = new QGraphicsView(centralWidget);
         FaceGV->setObjectName(QString::fromUtf8("FaceGV"));
 
-        formLayout->setWidget(5, QFormLayout::SpanningRole, FaceGV);
+        formLayout->setWidget(7, QFormLayout::SpanningRole, FaceGV);
+
+        DetectFacePB = new QPushButton(centralWidget);
+        DetectFacePB->setObjectName(QString::fromUtf8("DetectFacePB"));
+
+        formLayout->setWidget(5, QFormLayout::LabelRole, DetectFacePB);
+
+        RecognizeFacePB = new QPushButton(centralWidget);
+        RecognizeFacePB->setObjectName(QString::fromUtf8("RecognizeFacePB"));
+
+        formLayout->setWidget(5, QFormLayout::FieldRole, RecognizeFacePB);
 
 
         verticalLayout->addLayout(formLayout);

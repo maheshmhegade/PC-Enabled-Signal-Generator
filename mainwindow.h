@@ -40,6 +40,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <KDebug>
 
 #include "voicerecognition.h"
 #include "tlddatabase.h"
@@ -60,7 +61,7 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     void generateWave();
     void plotWave();
-    void recognizeVoice();
+    void recognizeVoice(QString personNmae);
     outputWave *wave;
     alsaSoundcard *allwaveObject;
     int boundingBox[4];

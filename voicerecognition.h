@@ -34,6 +34,7 @@
 
 #include <sys/types.h>
 #include <sys/time.h>
+#include <QString>
 
 #include <sphinxbase/err.h>
 #include <sphinxbase/ad.h>
@@ -99,12 +100,15 @@ class VoiceRecognition
 public:
     VoiceRecognition();
 
+    char languageModel[100];
+    char myDictionary[100];
     int waveVoltage,waveFrequency,waveDuration,waveType;
     ps_decoder_t *ps;
     cmd_ln_t *config;
     void sleep_msec(int32 ms);
     void startVoiceRecognition();
     void recognize_from_microphone();
+    void SelectAcousticModel(QString);
     ~VoiceRecognition();
 
 };
