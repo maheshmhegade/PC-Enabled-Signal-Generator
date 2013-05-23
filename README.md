@@ -29,7 +29,7 @@ In case voice recognized wrongly you can optionally say 'cancel',inorder to repe
 
 After 'generate' utterance you should see waveform plotted displayed on ui and also hear sound corresponding to waveform,optionally you can connect headphone jack to any circuit/cro to see the waveform generated while sound is playing.
 
-You can altogether discard voice and face recognition functionality and use as signal generator alone by mannually setting parameters and selecting play pushbutton.
+You can altogether discard voice and face recognition functionality and use as signal generator alone by mannually setting parameters and selecting Generate pushbutton.
 
 Make-sure
-You have opencv,sphinx-base,sphinx-training,pocketsphinx Qt installed in your system And you have mylm.lm,mydict.dic files in the build directory,where you have pcro binary file or you can have other language model if you want.
+You have alsasoundlib(asoundlib),opencv,sphinx-base,sphinx-training,pocketsphinx Qt installed in your system And you have mylm.lm,mydict.dic files in the build directory,where you have pcro binary file or you can have other language model if you want.
