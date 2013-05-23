@@ -95,11 +95,12 @@ void MainWindow::play_sound()
 
 void MainWindow::setWaveValues(VoiceRecognition *voiceRecognizer)
 {
+    /*
     ui->wavecomboBox->setCurrentIndex(voiceRecognizer->waveType);
     ui->voltagelineEdit->setText(QString(QString::number(voiceRecognizer->waveVoltage)));
     ui->frequencylineEdit->setText(QString(QString::number(voiceRecognizer->waveFrequency)));
     ui->durationlineEdit->setText(QString(QString::number(voiceRecognizer->waveDuration)));
-
+     */
     //transfer handle to plotAndPlay()
     emit plotAndPlayNow();
 }
@@ -176,7 +177,7 @@ void MainWindow::recognizeVoice(QString personNmae)
 
     //select acoustic model belonging to perticular person by supplying person name in QString form
     recognizer->SelectAcousticModel(personNmae);
-    recognizer->startVoiceRecognition();
+    recognizer->startVoiceRecognition(ui);
 
     //tranfser handle to setWaveValues()
     emit allValuesSet(recognizer);

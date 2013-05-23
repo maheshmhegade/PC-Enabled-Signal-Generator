@@ -41,6 +41,7 @@
 #include <sphinxbase/cont_ad.h>
 
 #include "pocketsphinx.h"
+#include "ui_mainwindow.h"
 
 using namespace std;
 
@@ -106,8 +107,8 @@ public:
     ps_decoder_t *ps;
     cmd_ln_t *config;
     void sleep_msec(int32 ms);
-    void startVoiceRecognition();
-    void recognize_from_microphone();
+    void startVoiceRecognition(Ui::MainWindow *mainui);
+    void recognize_from_microphone(Ui::MainWindow *mainui);
     void SelectAcousticModel(QString);
     ~VoiceRecognition();
 

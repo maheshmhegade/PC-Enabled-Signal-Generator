@@ -128,7 +128,7 @@ VoiceRecognition::VoiceRecognition()
     strcpy(myDictionary,(QString("mydict.dic")).toStdString().c_str());
 }
 
-void VoiceRecognition::startVoiceRecognition()
+void VoiceRecognition::startVoiceRecognition(Ui::MainWindow *mainui)
 {
     static const arg_t cont_args_def[] =
     {
@@ -180,13 +180,13 @@ void VoiceRecognition::startVoiceRecognition()
 
     if (setjmp(jbuf) == 0)
     {
-        recognize_from_microphone();
+        recognize_from_microphone(mainui);
     }
 
     ps_free(ps);
 }
 
-void VoiceRecognition::recognize_from_microphone()
+void VoiceRecognition::recognize_from_microphone(Ui::MainWindow *mainui)
 {
     ad_rec_t *ad;
     int16 adbuf[4096];
@@ -320,6 +320,7 @@ void VoiceRecognition::recognize_from_microphone()
                         }
                     }
                 }
+                mainui->wavecomboBox->setCurrentIndex(waveType);
             }
             else if (trackIndex == 1)
             {
@@ -343,9 +344,12 @@ void VoiceRecognition::recognize_from_microphone()
                         {
                             cout << "cancel" << endl;
                             waveFrequency = (int) (waveFrequency/10);
+                            cout << waveFrequency << endl;
                         }
                     }
                 }
+                mainui->frequencylineEdit->text().clear();
+                mainui->frequencylineEdit->setText(QString(QString::number(waveFrequency)));
             }
             else if (trackIndex == 2)
             {
@@ -372,6 +376,8 @@ void VoiceRecognition::recognize_from_microphone()
                         }
                     }
                 }
+                mainui->voltagelineEdit->text().clear();
+                mainui->voltagelineEdit->setText(QString(QString::number(waveVoltage)));
             }
             else if (trackIndex == 3)
             {
@@ -398,6 +404,8 @@ void VoiceRecognition::recognize_from_microphone()
                         }
                     }
                 }
+                mainui->durationlineEdit->text().clear();
+                mainui->durationlineEdit->setText(QString(QString::number(waveDuration)));
             }
             else if(trackIndex == 4)
             {

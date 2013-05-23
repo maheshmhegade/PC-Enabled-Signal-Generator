@@ -45,7 +45,6 @@
 #include "voicerecognition.h"
 #include "tlddatabase.h"
 #include "livevideo.h"
-#include "ui_mainwindow.h"
 
 using namespace voicerecognition;
 
