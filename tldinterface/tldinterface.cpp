@@ -133,7 +133,7 @@ pair<unitFaceModel *,IplImage *> tldinterface::generatefacemodel()
     return make_pair(facemodel,faceToDisplay);
 }
 
-pair<float,QString> tldinterface::getrecognitionconfidence(QList<unitFaceModel *> comparemodels)
+pair<IplImage*,QString> tldinterface::getrecognitionconfidence(QList<unitFaceModel *> comparemodels)
 {
     showOutput = 1;
     IplImage *img = imAcqGetImg(imAcq);
@@ -143,6 +143,7 @@ pair<float,QString> tldinterface::getrecognitionconfidence(QList<unitFaceModel *
         cvWaitKey(30);
     }
 
+    IplImage *returnImage;
     Mat grey(img->height, img->width, CV_8UC1);
     cvtColor(cv::Mat(img), grey, CV_BGR2GRAY);
 
@@ -210,8 +211,7 @@ pair<float,QString> tldinterface::getrecognitionconfidence(QList<unitFaceModel *
 
         if(maxconf == 0.0)
         {
-            float tmpconf = 0.0;
-            return make_pair(tmpconf,personName);
+            return make_pair(img,personName);
         }
 
         numTrainImages = 0;
@@ -245,6 +245,10 @@ pair<float,QString> tldinterface::getrecognitionconfidence(QList<unitFaceModel *
             if(tld->currConf > 0.0)
             {
                 personName = QString::fromAscii(facename, 15);
+                cvSetImageROI(img,*tld->currBB);
+                returnImage = cvCreateImage(cvSize(tld->currBB->height,tld->currBB->width),img->depth,img->nChannels);
+                cvCopy(img,returnImage);
+                cvResetImageROI(img);
                 maxConfidence = tld->currConf;
                 recognCount = 0;
             }
@@ -315,10 +319,15 @@ pair<float,QString> tldinterface::getrecognitionconfidence(QList<unitFaceModel *
                 reuseFrameOnce = false;
             }
         }
+        if (personName.length() <= 1)
+        {
+            returnImage = cvCreateImage(cvSize(img->height,img->width),img->depth,img->nChannels);
+            cvCopy(img,returnImage);
+        }
         if(maxConfidence > 0.1)
         {
             break;
         }
     }
-    return make_pair(maxConfidence,personName);
+    return make_pair(returnImage,personName);
 }

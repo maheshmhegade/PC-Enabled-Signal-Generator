@@ -98,7 +98,7 @@ public:
         imAcqFree(imAcq);
     }
     pair<unitFaceModel *,IplImage *> generatefacemodel();
-    pair<float,QString> getrecognitionconfidence(QList<unitFaceModel *> );
+    pair<IplImage *, QString> getrecognitionconfidence(QList<unitFaceModel *> );
 };
 
 #endif /* TLDINTERFACE_H_ */

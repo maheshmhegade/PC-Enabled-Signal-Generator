@@ -219,7 +219,9 @@ void MainWindow::on_RecognizeFacePB_clicked()
         delete tlddatabase;
 
         Tldrecognition* const tmpTLD      = new Tldrecognition;
-        std::pair<float,QString> faceName = tmpTLD->getRecognitionConfidence(comparemodels);
+        std::pair<IplImage*,QString> faceName = tmpTLD->getRecognitionConfidence(comparemodels);
+        ui->FaceNameLE->setText(faceName.second);
+        liveVideoObject->displayVideo(faceName.first,ui->FaceGV);
         qDebug() << "person "<< faceName.second << " recognized in front of the system";
         delete tmpTLD;
     }

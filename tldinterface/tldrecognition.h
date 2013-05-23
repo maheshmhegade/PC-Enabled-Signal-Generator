@@ -59,7 +59,7 @@ public:
 
     int updateDatabase(IplImage* const, const char* const) const;
 
-    pair<float,QString> getRecognitionConfidence(QList<unitFaceModel *>) const;
+    pair<IplImage *, QString> getRecognitionConfidence(QList<unitFaceModel *>) const;
 
 private:
 

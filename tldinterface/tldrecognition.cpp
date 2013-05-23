@@ -88,7 +88,7 @@ pair<unitFaceModel*,IplImage*> Tldrecognition::getModeltoStore() const
     return d->tldinterfaceObject->generatefacemodel();
 }
 
-pair<float,QString> Tldrecognition::getRecognitionConfidence(QList<unitFaceModel *> comparemodels) const
+pair<IplImage*,QString> Tldrecognition::getRecognitionConfidence(QList<unitFaceModel *> comparemodels) const
 {
     return d->tldinterfaceObject->getrecognitionconfidence(comparemodels);
 }
