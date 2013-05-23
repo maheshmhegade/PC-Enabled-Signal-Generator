@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Intelligent-system by maheshmhegade</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Intelligent-system</h1>
+        <p class="header">face recognition + voice recognition</p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/maheshmhegade/intelligent-system/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/maheshmhegade/intelligent-system/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/maheshmhegade/intelligent-system">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/maheshmhegade">maheshmhegade</a></p>
+
+
+      </header>
+      <section>
+        <h3>Build the project using following Sequence of commands in order</h3>
+
+<p>mkdir build</p>
+
+<p>cp mylm.lm build/</p>
+
+<p>cp mydict.dic build/</p>
+
+<p>cd build</p>
+
+<p>cmake ..</p>
+
+<p>make</p>
+
+<p>./pcro</p>
+
+<h3>Functionality:</h3>
+
+<p><strong>&gt;As soon as ui opens up,select detect face,it will detect face after a while(5-10 seconds) if not repeat the process untill correct face is detected.</strong>
+<strong>&gt;Give some name in edit box provided below and select save.</strong>
+<strong>&gt;select recognize face,now system try to recognize you,and after a while system starts recognizing the voice,select  parameters to generate waveform in the order wave-type,wave freqency,wave voltage,wave duration one by one by observing the terminal.</strong></p>
+
+<p><em>An example of voice command sequence look similar to this&gt;&gt;&gt;&gt; 'sine' &gt; 'next' &gt; 'one' &gt; 'zero' &gt; 'zero' &gt; 'zero' &gt; 'next' &gt; 'three' &gt; 'next' &gt; 'two' &gt; 'next' &gt; 'generate'</em></p>
+
+<p>In case voice recognized wrongly you can optionally say 'cancel',inorder to repeat and continue to selecting parameters.</p>
+
+<p>After 'generate' utterance you should see waveform plotted displayed on ui and also hear sound corresponding to waveform,optionally you can connect headphone jack to any circuit/cro to see the waveform generated while sound is playing.</p>
+
+<p>You can altogether discard voice and face recognition functionality and use as signal generator alone by mannually setting parameters and selecting Generate pushbutton.</p>
+
+<p><img src="https://lh5.googleusercontent.com/-U4rplZPyTH0/UZ20fOBOSSI/AAAAAAAAA_M/FOiDcm4BaQ0/w1019-h573-no/screenshot10.png" alt="screen">
+Make-sure</p>
+
+<blockquote>
+<p>You have alsasoundlib(asoundlib),opencv,sphinx-base,sphinx-training,pocketsphinx Qt installed in your system And you have mylm.lm,mydict.dic files in the build directory,where you have pcro binary file or you can have other language model if you want.</p>
+</blockquote>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
