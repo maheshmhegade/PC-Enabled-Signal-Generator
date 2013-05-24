@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     facemodeltostore = 0;
     allwaveObject = new alsaSoundcard();
     ui->setupUi(this);
+    ui->FaceGV->hide();
     wave = new outputWave();
 
     //enable this option to start voice recognition on starting the application
@@ -190,6 +191,8 @@ void MainWindow::on_SaveFacePB_clicked()
     facemodeltostore->Name = ui->FaceNameLE->text();
     cout << qPrintable(facemodeltostore->Name) << endl;
     tlddatabase->insertFaceModel(facemodeltostore);
+    ui->FaceNameLE->clear();
+    ui->FaceGV->hide();
     delete tlddatabase;
 }
 
@@ -198,6 +201,7 @@ void MainWindow::on_DetectFacePB_clicked()
     Tldrecognition* const tmpTLD          = new Tldrecognition;
     faceData = tmpTLD->getModeltoStore();
     //facemodeltostore = faceData.first;
+    ui->FaceGV->show();
     liveVideoObject->displayVideo(faceData.second,ui->FaceGV);
     delete tmpTLD;
 }
@@ -220,6 +224,8 @@ void MainWindow::on_RecognizeFacePB_clicked()
 
         Tldrecognition* const tmpTLD      = new Tldrecognition;
         std::pair<IplImage*,QString> faceName = tmpTLD->getRecognitionConfidence(comparemodels);
+        ui->FaceGV->show();
+        ui->FaceNameLE->clear();
         ui->FaceNameLE->setText(faceName.second);
         liveVideoObject->displayVideo(faceName.first,ui->FaceGV);
         qDebug() << "person "<< faceName.second << " recognized in front of the system";
