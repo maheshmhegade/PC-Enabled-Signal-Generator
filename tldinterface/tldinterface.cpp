@@ -45,7 +45,7 @@ pair<unitFaceModel *,IplImage *> tldinterface::generatefacemodel()
         cvWaitKey(30);
     }
     //detect face first
-    haarCascadePath = "/home/mmh/haarcascade_frontalface_alt.xml";
+    haarCascadePath = "haarcascade_frontalface_alt.xml";
     faceDetectCascade = (CvHaarClassifierCascade*)cvLoad( haarCascadePath, 0, 0, 0 );
     tmpStorageFaceDetect = cvCreateMemStorage(0);
 
